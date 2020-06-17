@@ -18,6 +18,7 @@ class App extends Component{
         }
         this.addItem = this.addItem.bind(this)
         this.changeInput = this.changeInput.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
     }
 
     changeInput(e){
@@ -31,6 +32,13 @@ class App extends Component{
             inputValue : ''
         })
     }
+    deleteItem(index){
+        let tempList = Object.assign([],this.state.list)
+        tempList.splice(index,1)
+        this.setState(() =>({
+            list:tempList
+        }))
+    }
     render(){
         return(
             <>
@@ -43,7 +51,7 @@ class App extends Component{
                 <Button type = 'primary' onClick = {this.addItem}>添加</Button>
               </div>
               <div>
-                  <List list = {this.state.list}/>
+                  <List list = {this.state.list} deleteItem = {this.deleteItem}/>
               </div>
             </>
         )
